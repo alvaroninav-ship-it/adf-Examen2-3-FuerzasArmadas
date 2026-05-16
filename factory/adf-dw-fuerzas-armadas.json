@@ -1,0 +1,10 @@
+{
+	"name": "adf-dw-fuerzas-armadas",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Enabled",
+			"editable": true
+		}
+	},
+	"location": "centralus"
+}
