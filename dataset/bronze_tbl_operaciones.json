@@ -1,12 +1,12 @@
 {
-	"name": "crudo_tbl_operaciones",
+	"name": "bronze_tbl_operaciones",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase1",
+			"referenceName": "BD_Propio",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "crudo"
+			"name": "bronze"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
@@ -37,43 +37,43 @@
 			},
 			{
 				"name": "fecha_inicio",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "fecha_fin",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "efectivos_desplegados",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "vehiculos_utilizados",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "duracion_dias",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "costo_operacion",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "resultado",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "detenidos",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "area_km2",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "incidentes",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "observaciones",
@@ -81,7 +81,7 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "oltp",
+			"schema": "bronze",
 			"table": "tbl_operaciones"
 		}
 	}

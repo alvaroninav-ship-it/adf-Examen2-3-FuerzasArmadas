@@ -1,12 +1,12 @@
 {
-	"name": "crudo_tbl_efectivos",
+	"name": "bronce_tbl_efectivos",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase1",
+			"referenceName": "BD_Propio",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "crudo"
+			"name": "bronze"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
@@ -37,15 +37,15 @@
 			},
 			{
 				"name": "ci",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "fecha_nacimiento",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "genero",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "departamento_origen",
@@ -53,19 +53,19 @@
 			},
 			{
 				"name": "fecha_ingreso",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "estado",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "salario_mensual",
-				"type": "varchar"
+				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
-			"schema": "oltp",
+			"schema": "bronze",
 			"table": "tbl_efectivos"
 		}
 	}

@@ -1,12 +1,12 @@
 {
-	"name": "bronze_tbl_especialidades",
+	"name": "crudo_tbl_especialidades",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase1",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "bronze"
+			"name": "crudo"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",

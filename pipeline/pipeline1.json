@@ -38,13 +38,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "bronze_tbl_efectivos",
+						"referenceName": "crudo_tbl_efectivos",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "bronze_tbl_efectivos",
+						"referenceName": "crudo_tbl_efectivos",
 						"type": "DatasetReference"
 					}
 				]
@@ -71,7 +71,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "bronze_tbl_especialidades",
+						"referenceName": "crudo_tbl_especialidades",
 						"type": "DatasetReference"
 					}
 				]

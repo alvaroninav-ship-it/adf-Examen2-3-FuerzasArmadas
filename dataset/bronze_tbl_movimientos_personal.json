@@ -1,12 +1,12 @@
 {
-	"name": "crudo_tbl_movimientos_personal",
+	"name": "bronze_tbl_movimientos_personal",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase1",
+			"referenceName": "BD_Propio",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "crudo"
+			"name": "bronze"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
@@ -38,15 +38,15 @@
 			},
 			{
 				"name": "fecha_movimiento",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "antiguedad_anios",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "salario_mensual",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "observaciones",
@@ -54,7 +54,7 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "oltp",
+			"schema": "bronze",
 			"table": "tbl_movimientos_personal"
 		}
 	}

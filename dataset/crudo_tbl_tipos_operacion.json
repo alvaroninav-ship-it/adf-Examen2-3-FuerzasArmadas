@@ -1,12 +1,12 @@
 {
-	"name": "bronze_tbl_tipos_operacion",
+	"name": "crudo_tbl_tipos_operacion",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase1",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "bronze"
+			"name": "crudo"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",

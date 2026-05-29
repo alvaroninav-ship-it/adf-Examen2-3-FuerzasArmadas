@@ -1,12 +1,12 @@
 {
-	"name": "crudo_tbl_unidades",
+	"name": "bronze_tbl_unidades",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase1",
+			"referenceName": "BD_Propio",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "crudo"
+			"name": "bronze"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
@@ -27,7 +27,7 @@
 			},
 			{
 				"name": "codigo",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
 				"name": "ciudad",
@@ -39,11 +39,11 @@
 			},
 			{
 				"name": "tipo_cuartel",
-				"type": "varchar"
+				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
-			"schema": "oltp",
+			"schema": "bronze",
 			"table": "tbl_unidades"
 		}
 	}

@@ -1,33 +1,33 @@
 {
-	"name": "crudo_tbl_tipos_movimiento",
+	"name": "bronze_tbl_especialidades",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase1",
+			"referenceName": "BD_Propio",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "crudo"
+			"name": "bronze"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "id_tipo",
+				"name": "id_especialidad",
 				"type": "int",
 				"precision": 10
 			},
 			{
 				"name": "nombre",
-				"type": "varchar"
+				"type": "nvarchar"
 			},
 			{
-				"name": "descripcion",
+				"name": "area",
 				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
-			"schema": "oltp",
-			"table": "tbl_tipos_movimiento"
+			"schema": "bronze",
+			"table": "tbl_especialidades"
 		}
 	}
 }

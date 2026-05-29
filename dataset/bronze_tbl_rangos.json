@@ -1,12 +1,12 @@
 {
-	"name": "crudo_tbl_rangos",
+	"name": "bronze_tbl_rangos",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase1",
+			"referenceName": "BD_Propio",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "crudo"
+			"name": "bronze"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
@@ -31,11 +31,11 @@
 			},
 			{
 				"name": "abreviatura",
-				"type": "varchar"
+				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
-			"schema": "oltp",
+			"schema": "bronze",
 			"table": "tbl_rangos"
 		}
 	}
