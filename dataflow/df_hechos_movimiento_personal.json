@@ -1,0 +1,74 @@
+{
+	"name": "df_hechos_movimiento_personal",
+	"properties": {
+		"folder": {
+			"name": "gold"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "silver_movimientos_personal",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "gold_Hechos_movimientos_personal",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          id_movimiento as integer,",
+				"          id_efectivo as integer,",
+				"          id_unidad_destino as integer,",
+				"          id_rango as integer,",
+				"          id_tipo as integer,",
+				"          fecha_movimiento as date,",
+				"          antiguedad_anios as integer,",
+				"          salario_mensual as decimal(10,2),",
+				"          observaciones as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     query: 'SELECT\\n    CAST(FORMAT(mp.fecha_movimiento, \\'yyyyMMdd\\') AS INT) AS id_tiempo,\\n    mp.id_efectivo,\\n    mp.id_rango,\\n    mp.id_unidad_destino    AS id_unidad,\\n    mp.id_tipo              AS id_tipo_movimiento,\\n    mp.antiguedad_anios,\\n    mp.salario_mensual\\nFROM silver.movimientos_personal mp\\nWHERE mp.fecha_movimiento IS NOT NULL\\n  AND mp.id_efectivo IS NOT NULL',",
+				"     format: 'query') ~> source1",
+				"source1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id_hecho as integer,",
+				"          id_tiempo as integer,",
+				"          id_efectivo as integer,",
+				"          id_rango as integer,",
+				"          id_unidad as integer,",
+				"          id_tipo_movimiento as integer,",
+				"          antiguedad_anios as integer,",
+				"          salario_mensual as decimal(10,2)",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          id_efectivo,",
+				"          id_rango,",
+				"          antiguedad_anios,",
+				"          salario_mensual",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}

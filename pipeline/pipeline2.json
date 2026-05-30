@@ -1,11 +1,18 @@
 {
-	"name": "pipeline1",
+	"name": "pipeline2",
 	"properties": {
 		"activities": [
 			{
 				"name": "Data flow1",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Script1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -16,7 +23,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_silver_efectivos",
+						"referenceName": "df_dim_rango",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -47,7 +54,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_silver_especialidades",
+						"referenceName": "df_dim_tipo_movimiento",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -78,7 +85,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_silver_estructura_organizacional",
+						"referenceName": "df_dim_tipo_operacion",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -109,7 +116,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_silver_movimientos_personal",
+						"referenceName": "df_dim_zona_operacion",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -140,7 +147,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_silver_operaciones",
+						"referenceName": "df_dim_efectivo",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -171,7 +178,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_silver_rangos",
+						"referenceName": "df_dim_unidad",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -202,7 +209,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_silver_tipos_operacion",
+						"referenceName": "df_dim_tiempo",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -233,7 +240,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_silver_tipos_movimientos",
+						"referenceName": "df_hechos_operacion",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -264,7 +271,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_silver_unidades",
+						"referenceName": "df_hechos_movimiento_personal",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -275,16 +282,9 @@
 				}
 			},
 			{
-				"name": "Data flow10",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "Data flow9",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"name": "Script1",
+				"type": "Script",
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -293,16 +293,18 @@
 					"secureInput": false
 				},
 				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "BD_Propio",
+					"type": "LinkedServiceReference"
+				},
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "df_silver_zonas",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
+					"scripts": [
+						{
+							"type": "Query",
+							"text": "-- Primero limpiar Hechos\nDELETE FROM gold.Hechos_Movimiento_Personal;\nDELETE FROM gold.Hechos_Operacion;\n\n-- Luego limpiar Dims\nDELETE FROM gold.Dim_Rango;\nDELETE FROM gold.Dim_Tipo_Movimiento;\nDELETE FROM gold.Dim_Tipo_Operacion;\nDELETE FROM gold.Dim_Zona_Operacion;\nDELETE FROM gold.Dim_Efectivo;\nDELETE FROM gold.Dim_Unidad;\nDELETE FROM gold.Dim_Tiempo;"
+						}
+					],
+					"scriptBlockExecutionTimeout": "02:00:00"
 				}
 			}
 		],

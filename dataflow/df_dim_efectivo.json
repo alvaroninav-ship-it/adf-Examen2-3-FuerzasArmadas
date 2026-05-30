@@ -1,0 +1,83 @@
+{
+	"name": "df_dim_efectivo",
+	"properties": {
+		"folder": {
+			"name": "gold"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "silver_efectivos",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "gold_dim_efectivo",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          id_efectivo as integer,",
+				"          id_especialidad as integer,",
+				"          id_unidad_actual as integer,",
+				"          id_rango_actual as integer,",
+				"          nombre as string,",
+				"          ci as string,",
+				"          fecha_nacimiento as date,",
+				"          genero as string,",
+				"          departamento_origen as string,",
+				"          fecha_ingreso as date,",
+				"          estado as string,",
+				"          salario_mensual as decimal(10,2)",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     query: 'SELECT\\n    ef.id_efectivo,\\n    ef.nombre,\\n    ef.ci,\\n    ef.genero,\\n    ef.fecha_nacimiento,\\n    ef.departamento_origen,\\n    ef.fecha_ingreso,\\n    ef.estado,\\n    esp.nombre      AS especialidad,\\n    esp.area        AS area_especialidad\\nFROM silver.efectivos ef\\nLEFT JOIN silver.especialidades esp\\n    ON ef.id_especialidad = esp.id_especialidad',",
+				"     format: 'query') ~> source1",
+				"source1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id_efectivo as integer,",
+				"          nombre as string,",
+				"          ci as string,",
+				"          genero as string,",
+				"          fecha_nacimiento as date,",
+				"          departamento_origen as string,",
+				"          fecha_ingreso as date,",
+				"          estado as string,",
+				"          especialidad as string,",
+				"          area_especialidad as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          id_efectivo,",
+				"          nombre,",
+				"          ci,",
+				"          genero,",
+				"          fecha_nacimiento,",
+				"          departamento_origen,",
+				"          fecha_ingreso,",
+				"          estado",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}

@@ -1,0 +1,77 @@
+{
+	"name": "df_dim_tiempo",
+	"properties": {
+		"folder": {
+			"name": "gold"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "silver_operaciones",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "gold_dim_tiempo",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          id_operacion as integer,",
+				"          id_tipo as integer,",
+				"          id_unidad_resp as integer,",
+				"          id_zona as integer,",
+				"          nombre_operacion as string,",
+				"          fecha_inicio as date,",
+				"          fecha_fin as date,",
+				"          efectivos_desplegados as integer,",
+				"          vehiculos_utilizados as integer,",
+				"          duracion_dias as integer,",
+				"          costo_operacion as decimal(15,2),",
+				"          resultado as string,",
+				"          detenidos as integer,",
+				"          area_km2 as decimal(10,2),",
+				"          incidentes as string,",
+				"          observaciones as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     query: 'SELECT DISTINCT\\n    CAST(FORMAT(fecha, \\'yyyyMMdd\\') AS INT)  AS id_tiempo,\\n    fecha,\\n    YEAR(fecha)                             AS anio,\\n    DATEPART(QUARTER, fecha)                AS trimestre,\\n    MONTH(fecha)                            AS mes,\\n    DATENAME(MONTH, fecha)                  AS nombre_mes,\\n    DATEPART(WEEK, fecha)                   AS semana,\\n    DAY(fecha)                              AS dia,\\n    DATENAME(WEEKDAY, fecha)                AS nombre_dia,\\n    CASE WHEN DATEPART(WEEKDAY, fecha) \\n         IN (1,7) THEN 1 ELSE 0 END        AS es_fin_semana\\nFROM (\\n    SELECT fecha_inicio AS fecha FROM silver.operaciones\\n    UNION\\n    SELECT fecha_fin    AS fecha FROM silver.operaciones\\n    UNION\\n    SELECT fecha_movimiento AS fecha FROM silver.movimientos_personal\\n) fechas\\nWHERE fecha IS NOT NULL',",
+				"     format: 'query') ~> source1",
+				"source1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id_tiempo as integer,",
+				"          fecha as date,",
+				"          anio as integer,",
+				"          trimestre as integer,",
+				"          mes as integer,",
+				"          nombre_mes as string,",
+				"          semana as integer,",
+				"          dia as integer,",
+				"          nombre_dia as string,",
+				"          es_fin_semana as boolean",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+			]
+		}
+	}
+}

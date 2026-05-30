@@ -62,7 +62,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "bronze_tbl_unidades",
+						"referenceName": "crudo_tbl_unidades",
 						"type": "DatasetReference"
 					},
 					"name": "unidades"

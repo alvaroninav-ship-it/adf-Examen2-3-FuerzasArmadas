@@ -1,15 +1,12 @@
 {
-	"name": "df_silver_tipos_movimientos",
+	"name": "dataflow1",
 	"properties": {
-		"folder": {
-			"name": "silver"
-		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "bronze_tbl_tipos_movimiento",
+						"referenceName": "crudo_tbl_unidades",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -18,36 +15,37 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "silver_tipos_movimientos",
+						"referenceName": "bronze_tbl_unidades",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
 				}
 			],
-			"transformations": [
-				{
-					"name": "derivedColumn1"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          id_tipo as integer,",
+				"          id_unidad as integer,",
+				"          id_brigada as integer,",
 				"          nombre as string,",
-				"          descripcion as string",
+				"          codigo as string,",
+				"          ciudad as string,",
+				"          departamento as string,",
+				"          tipo_cuartel as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> source1",
-				"source1 derive(id_tipo = toInteger(id_tipo),",
-				"          nombre = trim(upper(nombre)),",
-				"          descripcion = iif(isNull(descripcion), 'SIN DESCRIPCION',                          trim(descripcion))) ~> derivedColumn1",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"source1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          id_tipo as integer,",
+				"          id_unidad as integer,",
+				"          id_brigada as integer,",
 				"          nombre as string,",
-				"          descripcion as string",
+				"          codigo as string,",
+				"          ciudad as string,",
+				"          departamento as string,",
+				"          tipo_cuartel as string",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",

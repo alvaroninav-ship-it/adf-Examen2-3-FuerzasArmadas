@@ -1,15 +1,15 @@
 {
-	"name": "df_silver_tipos_movimientos",
+	"name": "df_dim_tipo_operacion",
 	"properties": {
 		"folder": {
-			"name": "silver"
+			"name": "gold"
 		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "bronze_tbl_tipos_movimiento",
+						"referenceName": "silver_tipos_operacion",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -18,34 +18,28 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "silver_tipos_movimientos",
+						"referenceName": "gold_dim_tipo_movimiento",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
 				}
 			],
-			"transformations": [
-				{
-					"name": "derivedColumn1"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(output(",
 				"          id_tipo as integer,",
 				"          nombre as string,",
-				"          descripcion as string",
+				"          categoria as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> source1",
-				"source1 derive(id_tipo = toInteger(id_tipo),",
-				"          nombre = trim(upper(nombre)),",
-				"          descripcion = iif(isNull(descripcion), 'SIN DESCRIPCION',                          trim(descripcion))) ~> derivedColumn1",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     query: 'SELECT\\n    id_tipo AS id_tipo_operacion,\\n    nombre,\\n    categoria\\nFROM silver.tipos_operacion',",
+				"     format: 'query') ~> source1",
+				"source1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          id_tipo as integer,",
+				"          id_tipo_movimiento as integer,",
 				"          nombre as string,",
 				"          descripcion as string",
 				"     ),",
@@ -56,7 +50,10 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          nombre",
+				"     )) ~> sink1"
 			]
 		}
 	}
