@@ -1,0 +1,51 @@
+{
+	"name": "silver_estructura_organizacional",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BD_Propio",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "silver"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_estructura",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_padre",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nivel",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nombre",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sigla",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tipo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cobertura_departamentos",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "silver",
+			"table": "estructura_organizacional"
+		}
+	}
+}

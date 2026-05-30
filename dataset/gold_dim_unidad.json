@@ -1,0 +1,57 @@
+{
+	"name": "gold_dim_unidad",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BD_Propio",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "gold"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_unidad",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nombre",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ciudad",
+				"type": "nvarchar"
+			},
+			{
+				"name": "departamento",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tipo_cuartel",
+				"type": "nvarchar"
+			},
+			{
+				"name": "brigada",
+				"type": "nvarchar"
+			},
+			{
+				"name": "division",
+				"type": "nvarchar"
+			},
+			{
+				"name": "rama",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "gold",
+			"table": "Dim_Unidad"
+		}
+	}
+}

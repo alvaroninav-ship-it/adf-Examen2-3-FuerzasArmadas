@@ -1,5 +1,5 @@
 {
-	"name": "cargar_datos",
+	"name": "cargar_datos_bronze",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {

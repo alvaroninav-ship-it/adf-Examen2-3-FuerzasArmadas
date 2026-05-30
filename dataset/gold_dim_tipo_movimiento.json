@@ -1,0 +1,33 @@
+{
+	"name": "gold_dim_tipo_movimiento",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BD_Propio",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "gold"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_tipo_movimiento",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nombre",
+				"type": "nvarchar"
+			},
+			{
+				"name": "descripcion",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "gold",
+			"table": "Dim_Tipo_Movimiento"
+		}
+	}
+}
