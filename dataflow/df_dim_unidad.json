@@ -28,12 +28,13 @@
 			"scriptLines": [
 				"source(output(",
 				"          id_unidad as integer,",
-				"          id_brigada as integer,",
 				"          nombre as string,",
 				"          codigo as string,",
 				"          ciudad as string,",
 				"          departamento as string,",
-				"          tipo_cuartel as string",
+				"          tipo_cuartel as string,",
+				"          brigada as string,",
+				"          rama as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -67,7 +68,9 @@
 				"          codigo,",
 				"          ciudad,",
 				"          departamento,",
-				"          tipo_cuartel",
+				"          tipo_cuartel,",
+				"          brigada,",
+				"          rama",
 				"     )) ~> sink1"
 			]
 		}

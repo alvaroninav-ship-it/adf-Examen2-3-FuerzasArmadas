@@ -28,17 +28,15 @@
 			"scriptLines": [
 				"source(output(",
 				"          id_efectivo as integer,",
-				"          id_especialidad as integer,",
-				"          id_unidad_actual as integer,",
-				"          id_rango_actual as integer,",
 				"          nombre as string,",
 				"          ci as string,",
-				"          fecha_nacimiento as date,",
 				"          genero as string,",
+				"          fecha_nacimiento as date,",
 				"          departamento_origen as string,",
 				"          fecha_ingreso as date,",
 				"          estado as string,",
-				"          salario_mensual as decimal(10,2)",
+				"          especialidad as string,",
+				"          area_especialidad as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -75,7 +73,9 @@
 				"          fecha_nacimiento,",
 				"          departamento_origen,",
 				"          fecha_ingreso,",
-				"          estado",
+				"          estado,",
+				"          especialidad,",
+				"          area_especialidad",
 				"     )) ~> sink1"
 			]
 		}
